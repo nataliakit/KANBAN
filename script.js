@@ -46,18 +46,18 @@ function getAllColumns() {
   return COLUMNS.map(column => getColumnHtml(column)).join('');
 }
 
-function getCardsHtml(cards) {
-  return cards.map(card => getCardHtml(card)).join('');
+function getCardsHtml(cards, columns) {
+  return cards.map(card => getCardHtml(card, columns)).join('');
 }
 
-function getCardsByColumnId(columnId) {
+function getCardsByColumnId(columnId, columns) {
   let cards = CARDS.filter(card => card.columnId === columnId);
-  return getCardsHtml(cards);
+  return getCardsHtml(cards, columns);
 }
 
 function setCardsToColumns() {
   COLUMNS.forEach(column => {
-    let cardsHtml = getCardsByColumnId(column.id);
+    let cardsHtml = getCardsByColumnId(column.id, COLUMNS);
     let cardListElement = document.querySelector(`.column__cards[data-id="${column.id}"]`);
     cardListElement.innerHTML = cardsHtml;
   });
